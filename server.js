@@ -9,9 +9,8 @@ import checkUserRoutes from './Routes/checkUser.routes.js'
 
 import connectToMongoDB from "./db/connectToMongoDB.js";
 
-// import io from "socket.io"
-
-
+import { Server } from "socket.io"
+import createServer from 'http'
 const app = express()
 const PORT = process.env.PORT || 5050;
 dotenv.config();
@@ -54,3 +53,36 @@ const server = app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 })
 
+
+
+const io = new Server(server, {
+    pingTimeout: 60000,
+    cors: {
+        origin: 'https://localhost:3000'
+    }
+})
+
+io.on('connection', (socket) => {
+
+    console.log("connected to socket");
+    socket.on("setup", (userData) => {
+        socket.join(userData._id);
+        console.log(userData._id);
+        socket.emit("connection")
+    })
+
+    socket.on("join room", (room) => {
+        socket.join(room)
+        console.log("user joined room " + room);
+    })
+
+    socket.on("new message", (newMessageRecieved) => {
+        if (!newMessageRecieved) return console.log("message not received");
+        // if (newMessageRecieved.senderId===)
+
+        socket.in(newMessageRecieved.senderId).emit("message received", newMessageRecieved)
+
+    })
+
+
+})
