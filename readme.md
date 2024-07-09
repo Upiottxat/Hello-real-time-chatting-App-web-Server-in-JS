@@ -51,7 +51,7 @@ This is the server-side implementation for a real-time chatting application usin
     Create a `.env` file in the root directory and add your environment variables:
 
     ```env
-    PORT=5000
+    PORT=8000
     MONGODB_URI=your_mongodb_uri
     JWT_SECRET=your_jwt_secret
     ```
@@ -62,7 +62,7 @@ This is the server-side implementation for a real-time chatting application usin
     npm start
     ```
 
-    The server will be available at `http://localhost:5000`.
+    The server will be available at `http://localhost:8000`.
 
 ## Usage
 
