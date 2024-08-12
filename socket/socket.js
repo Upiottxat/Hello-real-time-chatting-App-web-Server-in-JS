@@ -2,7 +2,7 @@ import server from "../server";
 const io = new Server(server, {
     pingTimeout: 60000,
     cors: {
-        origin: 'https://localhost:3000'
+        origin: 'https://chathello.netlify.app/'
     }
 })
 
