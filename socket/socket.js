@@ -3,7 +3,7 @@ const setupWebSocket = (server) => {
     const io = new Server(server, {
         pingTimeout: 60000,
         cors: {
-            origin: "https://chathello.netlify.app/"
+            origin: "https://chathello.netlify.app"
         }
     })
     console.log("lising socket");
