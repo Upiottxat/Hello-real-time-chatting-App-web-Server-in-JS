@@ -5,6 +5,7 @@ const io = new Server(server, {
         origin: 'https://chathello.netlify.app/'
     }
 })
+console.log("socket is on")
 
 io.on('connection', (socket) => {
 
