@@ -8,13 +8,11 @@ import usersRoutes from './Routes/user.routes.js'
 import checkUserRoutes from './Routes/checkUser.routes.js'
 
 import connectToMongoDB from "./db/connectToMongoDB.js";
-
-import { Server } from "socket.io"
-import createServer from 'http'
 const app = express()
 const PORT = process.env.PORT || 5050;
 dotenv.config();
 import cors from 'cors'
+import setupWebSocket from "./socket/socket.js";
 app.use(cors({
     origin: "*",
     methods: ["GET", "POST"],
@@ -47,11 +45,13 @@ app.get("/testJson", (req, res) => {
 
 
 
+
+
 const server = app.listen(PORT, () => {
     connectToMongoDB();
-
+    setupWebSocket(server)
     console.log(`Server is running on port ${PORT}`);
 })
-export default server
+
 
 
